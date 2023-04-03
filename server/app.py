@@ -14,15 +14,29 @@ def print_string(param):
     print(param)
     return f"{param}"
 
-@app.route('/count/<int:int>') 
-def count(int):
-   return f'''
-   
-   '''
+@app.route('/count/<int:number>') 
+def count(number):
+    output = ''
+    for i in range(number):
+        output += str(i) + '\n'
+    return output        
 
-@app.route('/math/<num1><operation><num2>')
+@app.route('/math/<int:num1><string:operation><int:num2>')
 def math(num1, operation, num2):
-    pass
+    if operation == '+':
+        result = num1 + num2
+    elif operation == '-':
+        result = num1 - num2
+    elif operation == '*':
+        result = num1 * num2
+    elif operation == 'div':
+        result = num1 / num2
+    elif operation == '%':
+        result = num1 % num2
+    else:
+        return 'Invalid operation'
+
+    return str(result)
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
